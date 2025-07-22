@@ -201,19 +201,13 @@ const RainingLetters: React.FC = () => {
       {characters.map((char, index) => (
         <span
           key={index}
-          className={`absolute text-xs transition-colors duration-100 ${
-            activeIndices.has(index)
-              ? "text-blue-600 text-base scale-125 z-10 font-bold animate-pulse"
-              : "text-gray-400 font-light"
-          }`}
+          className={`absolute text-xs transition-colors duration-100 text-gray-600 font-light`}
           style={{
             left: `${char.x}%`,
             top: `${char.y}%`,
-            transform: `translate(-50%, -50%) ${activeIndices.has(index) ? 'scale(1.25)' : 'scale(1)'}`,
-            textShadow: activeIndices.has(index) 
-              ? '0 0 8px rgba(59,130,246,0.8), 0 0 12px rgba(59,130,246,0.4)' 
-              : 'none',
-            opacity: activeIndices.has(index) ? 1 : 0.4,
+            transform: `translate(-50%, -50%)`,
+            textShadow: 'none',
+            opacity: 0.6,
             transition: 'color 0.1s, transform 0.1s, text-shadow 0.1s',
             willChange: 'transform, top',
             fontSize: '1.8rem'
