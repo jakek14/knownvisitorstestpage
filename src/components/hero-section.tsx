@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Mail, Send, Menu, ArrowRight, Check, Download } from 'lucide-react'
+import { Mail, ArrowRight, Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 import { WavyBackground } from '@/components/ui/wavy-background'
@@ -13,8 +13,9 @@ import { HyperText } from "@/components/ui/hyper-text";
 import ImageAutoSlider from "@/components/ui/image-auto-slider";
 import Timeline from "@/components/ui/timeline-demo";
 import { TiltedScroll } from "./ui/tilted-scroll";
-import { ThreeDPhotoCarousel } from "./ui/3d-carousel";
+
 import { LockAnimation } from "./ui/lock-animation";
+import ThemeToggle from "./ThemeToggle";
 
 const dynamicWords = [
     'Leads',
@@ -23,20 +24,11 @@ const dynamicWords = [
     'Subscribers',
     'Clients',
     'Conversions',
-    'Opportunities',
     'Revenue',
     'Sales'
 ]
 
-// Animation variants for synchronized entry
-const rowVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+
 
 // Pop animation variants
 const popVariants = {
@@ -96,17 +88,26 @@ export function HeroSection() {
     };
 
     return (
-        <div className="relative bg-white" data-hero-section>
-            {/* Hero Section with Wavy Background */}
-            <WavyBackground 
-                backgroundFill="white"
+            <div className="relative bg-white" data-hero-section>
+      {/* Hero Section with Wavy Background */}
+      <WavyBackground
+        backgroundFill="white"
                 waveOpacity={0.3}
                 blur={5}
                 speed="slow"
                 containerClassName="min-h-screen"
             >
-                <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-32">
+                <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-12 lg:pt-16">
                     <div className="relative z-10 mx-auto max-w-4xl text-center">
+                        {/* Logo */}
+                        <div className="flex justify-center mb-2">
+                            <img 
+                                src="/Untitled design (3).png" 
+                                alt="KnownVisitors Logo" 
+                                className="h-16 sm:h-20 md:h-24 object-contain"
+                            />
+                        </div>
+                        
                         <h1 className="text-balance text-5xl sm:text-6xl md:text-7xl font-bold sm:font-medium leading-tight text-gray-900 text-center">
                             <span className="block">Turn Anonymous</span>
                             <span className="block sm:inline">Visitors Into{' '}</span>
@@ -192,7 +193,7 @@ export function HeroSection() {
                             <div className="w-full max-w-6xl mx-auto bg-white rounded-xl shadow-2xl border overflow-hidden relative transform hover:scale-[1.02] transition-transform duration-300">
                                 <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-10" />
                                 <div className="absolute inset-0 rounded-xl shadow-inner pointer-events-none" />
-                                <div className="h-[400px] sm:h-[500px] overflow-y-auto">
+                                <div className="h-[400px] sm:h-[500px] overflow-y-hidden md:overflow-y-auto">
                                     <MemberList />
                                 </div>
                             </div>
@@ -218,7 +219,7 @@ export function HeroSection() {
                             ease: [0.25, 0.46, 0.45, 0.94],
                             delay: 0.2
                         }}
-                        className="text-white text-2xl sm:text-2xl lg:text-5xl font-normal leading-relaxed"
+                        className="text-white text-lg sm:text-xl lg:text-3xl font-normal leading-relaxed"
                     >
                         Why Guess Who's on Your Site? Instantly Identify Anonymous Visitors, Capture Insights, Optimize Engagement, and Fuel Smarter Marketing.
                     </motion.p>
@@ -253,7 +254,7 @@ export function HeroSection() {
                                 iconClassName: "text-green-500",
                                 titleClassName: "text-green-500",
                                 className:
-                                  "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+                                  "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-white/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
                               },
                               {
                                 icon: <AlertTriangle className="size-4 text-green-300" />,
@@ -263,7 +264,7 @@ export function HeroSection() {
                                 iconClassName: "text-green-500",
                                 titleClassName: "text-green-500",
                                 className:
-                                  "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+                                  "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-white/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
                               },
                               {
                                 icon: <AlertTriangle className="size-4 text-green-300" />,
@@ -311,7 +312,7 @@ export function HeroSection() {
                               <select
                                 value={selectedTimeFrame}
                                 onChange={handleTimeFrameChange}
-                                className="bg-muted text-muted-foreground rounded-full pl-3 pr-8 py-2 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer border border-border shadow-sm transition-all duration-200 hover:bg-background/80 focus:bg-background/90"
+                                className="bg-gray-50 text-muted-foreground rounded-full pl-3 pr-8 py-2 text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer border border-border shadow-sm transition-all duration-200 hover:bg-white/80 focus:bg-white/90"
                               >
                                 <option value="Monthly">Monthly</option>
                                 <option value="Quarterly">Quarterly</option>
@@ -330,7 +331,7 @@ export function HeroSection() {
                     </motion.div>
                     {/* Row 3 */}
                     <motion.div
-                      className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center hidden"
                       variants={popVariants}
                       initial="hidden"
                       whileInView="show"
@@ -789,21 +790,76 @@ export function HeroSection() {
                     </div>
                 </div>
                 
-                {/* Join Waitlist Button */}
-                <div className="text-center mt-16">
-                    <Button 
-                        variant="outline"
-                        onClick={() => {
-                            const heroSection = document.querySelector('[data-hero-section]');
-                            if (heroSection) {
-                                heroSection.scrollIntoView({ behavior: 'smooth' });
-                            }
-                        }}
-                        className="bg-green-600 hover:bg-green-700 text-white hover:text-white rounded-2xl px-12 py-6 font-semibold text-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:shadow-3xl border-green-600 relative overflow-hidden group shadow-[0_8px_0_rgb(22,163,74)] hover:shadow-[0_4px_0_rgb(22,163,74)] hover:translate-y-1"
+                {/* Cloned Row 1 - Visitor Recognition */}
+                <div className="max-w-7xl mx-auto px-6 mt-20">
+                    <motion.div
+                        className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center"
+                        variants={popVariants}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.5 }}
                     >
-                        <span className="relative z-10">Join the Waitlist</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </Button>
+                        <div className="w-full min-h-80 flex items-center justify-center mr-20">
+                            {/* DisplayCardsDemo component */}
+                            <DisplayCards cards={[
+                                {
+                                    icon: <AlertTriangle className="size-4 text-green-300" />,
+                                    title: "Alert",
+                                    description: "John Doe has visited your website",
+                                    date: "1 day ago",
+                                    iconClassName: "text-green-500",
+                                    titleClassName: "text-green-500",
+                                    className:
+                                        "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-white/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+                                },
+                                {
+                                    icon: <AlertTriangle className="size-4 text-green-300" />,
+                                    title: "Alert",
+                                    description: "Jane Smith has visited your website",
+                                    date: "1 day ago",
+                                    iconClassName: "text-green-500",
+                                    titleClassName: "text-green-500",
+                                    className:
+                                        "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-white/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+                                },
+                                {
+                                    icon: <AlertTriangle className="size-4 text-green-300" />,
+                                    title: "Alert",
+                                    description: "Mike Johnson has visited your website",
+                                    date: "1 day ago",
+                                    iconClassName: "text-green-500",
+                                    titleClassName: "text-green-500",
+                                    className:
+                                        "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10",
+                                },
+                            ]} />
+                        </div>
+                        <div className="w-full">
+                            <h4 className="text-2xl font-bold text-green-600 mb-4">See Who's Visiting</h4>
+                            <h3 className="text-4xl font-bold mb-8 text-gray-900">Visitor Recognition</h3>
+                            <p className="text-2xl text-gray-700 mb-4">With a single pixel, knownvisitors.com reveals the full picture of your website traffic — surfacing both known customers and previously anonymous visitors as they arrive.</p>
+                        </div>
+                    </motion.div>
+                </div>
+                
+                {/* Join Waitlist Button and Theme Toggle */}
+                <div className="text-center mt-16">
+                    <div className="flex items-center justify-center gap-4">
+                        <Button 
+                            variant="outline"
+                            onClick={() => {
+                                const heroSection = document.querySelector('[data-hero-section]');
+                                if (heroSection) {
+                                    heroSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                            className="bg-green-600 hover:bg-green-700 text-white hover:text-white rounded-2xl px-12 py-6 font-semibold text-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:shadow-3xl border-green-600 relative overflow-hidden group shadow-[0_8px_0_rgb(22,163,74)] hover:shadow-[0_4px_0_rgb(22,163,74)] hover:translate-y-1"
+                        >
+                            <span className="relative z-10">Join the Waitlist</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </Button>
+                        <ThemeToggle />
+                    </div>
                 </div>
             </section>
 

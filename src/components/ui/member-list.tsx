@@ -4,34 +4,25 @@ import { Button } from '@/components/ui/button'
 
 const MemberList: React.FC = () => {
   const members = [
-    { id: 1, name: "John Smith", email: "john.smith@techcorp.com", phone: "+1 (555) 123-4567", date: "2024-01-15" },
-    { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com", phone: "+1 (555) 234-5678", date: "2024-01-14" },
-    { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com", phone: "+1 (555) 345-6789", date: "2024-01-13" },
-    { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com", phone: "+1 (555) 456-7890", date: "2024-01-12" },
-    { id: 5, name: "David Brown", email: "david.brown@consulting.com", phone: "+1 (555) 567-8901", date: "2024-01-11" },
-    { id: 6, name: "Lisa Garcia", email: "lisa.garcia@digitalagency.com", phone: "+1 (555) 678-9012", date: "2024-01-10" },
-    { id: 7, name: "Alex Chen", email: "alex.chen@innovate.com", phone: "+1 (555) 789-0123", date: "2024-01-09" },
-    { id: 8, name: "Maria Rodriguez", email: "maria.r@creative.com", phone: "+1 (555) 890-1234", date: "2024-01-08" }
+    { id: 1, name: "John Smith", email: "john.smith@techcorp.com", address: "123 Main St, San Francisco, CA 94102", phone: "+1 (555) 123-4567" },
+    { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com", address: "456 Oak Ave, New York, NY 10001", phone: "+1 (555) 234-5678" },
+    { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com", address: "789 Pine Rd, Austin, TX 73301", phone: "+1 (555) 345-6789" },
+    { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com", address: "321 Elm Blvd, Seattle, WA 98101", phone: "+1 (555) 456-7890" },
+    { id: 5, name: "David Brown", email: "david.brown@consulting.com", address: "654 Maple Dr, Boston, MA 02101", phone: "+1 (555) 567-8901" },
+    { id: 6, name: "Lisa Garcia", email: "lisa.garcia@digitalagency.com", address: "987 Cedar Ln, Miami, FL 33101", phone: "+1 (555) 678-9012" },
+    { id: 7, name: "Alex Chen", email: "alex.chen@innovate.com", address: "147 Birch Way, Denver, CO 80201", phone: "+1 (555) 789-0123" },
+    { id: 8, name: "Maria Rodriguez", email: "maria.r@creative.com", address: "258 Spruce Ct, Portland, OR 97201", phone: "+1 (555) 890-1234" }
   ]
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric' 
-    })
-  }
-
   const exportToCSV = () => {
-    const headers = ['Name', 'Email', 'Phone', 'Date']
+    const headers = ['Name', 'Email', 'Address', 'Phone']
     const csvContent = [
       headers.join(','),
       ...members.map(member => [
         member.name,
         member.email,
-        member.phone,
-        formatDate(member.date)
+        member.address,
+        member.phone
       ].join(','))
     ].join('\n')
 
@@ -58,7 +49,7 @@ const MemberList: React.FC = () => {
             </div>
             <div className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
               <div className="text-left">
-                Phone
+                Address
               </div>
             </div>
             <div className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
@@ -68,7 +59,7 @@ const MemberList: React.FC = () => {
             </div>
             <div className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
               <div className="text-left">
-                Date
+                Phone
               </div>
             </div>
           </div>
@@ -84,7 +75,7 @@ const MemberList: React.FC = () => {
                 </div>
                 <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex justify-center">
                   <div className="text-left">
-                    {member.phone}
+                    {member.address}
                   </div>
                 </div>
                 <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex justify-center">
@@ -94,7 +85,7 @@ const MemberList: React.FC = () => {
                 </div>
                 <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex justify-center">
                   <div className="text-left">
-                    {formatDate(member.date)}
+                    {member.phone}
                   </div>
                 </div>
               </div>
@@ -129,7 +120,7 @@ const MemberList: React.FC = () => {
                     {member.name}
                   </div>
                 </div>
-                <div className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 flex justify-center">
+                <div className="px-4 py-4 text-sm text-gray-900 flex justify-center">
                   <div className="text-left">
                     {member.phone}
                   </div>

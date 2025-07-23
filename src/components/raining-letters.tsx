@@ -9,7 +9,6 @@ interface Character {
 
 const RainingLetters: React.FC = () => {
   const [characters, setCharacters] = useState<Character[]>([])
-  const [activeIndices, setActiveIndices] = useState<Set<number>>(new Set())
 
   const createCharacters = useCallback(() => {
     const allChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"
@@ -33,15 +32,7 @@ const RainingLetters: React.FC = () => {
     setCharacters(createCharacters())
   }, [createCharacters])
 
-  useEffect(() => {
-    const updateActiveIndices = () => {
-      // Removed the blue flashing effect - no more active indices
-      setActiveIndices(new Set())
-    }
 
-    const flickerInterval = setInterval(updateActiveIndices, 50)
-    return () => clearInterval(flickerInterval)
-  }, [characters.length])
 
   useEffect(() => {
     let animationFrameId: number

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { CheckIcon } from "lucide-react";
+
 import { cn } from '@/lib/utils';
 
 interface TimelineStep {
@@ -33,29 +33,28 @@ const defaultSteps: TimelineStep[] = [
   },
   {
     id: 3,
-    title: "Connect Your Tools",
-    description: "Sync data with Klaviyo, Google, Meta, and more.",
-    completed: false
+    title: "Use Your Tools",
+    description: "Push to Klaviyo, Google, Meta, and more.",
+    completed: true
   },
   {
     id: 4,
     title: "Boost Conversions",
     description: "Retarget high-intent visitors with emails, ads, and automation.",
-    completed: false
+    completed: true
   }
 ];
 
 const Timeline: React.FC<TimelineProps> = ({ 
   steps = defaultSteps, 
-  currentStep = 2,
   className 
 }) => {
-  const [activeStep, setActiveStep] = React.useState<number>(1);
-  const [expandedStep, setExpandedStep] = React.useState<number | null>(1);
+  const [activeStep, setActiveStep] = React.useState<number>(4);
+  const [expandedStep, setExpandedStep] = React.useState<number | null>(4);
+  const [pulsingStep, setPulsingStep] = React.useState<number>(1);
   const mobileSliderRef = React.useRef<HTMLDivElement>(null);
 
-  // MOBILE: horizontal slider logic
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
 
   // Auto-update activeStep on mobile scroll
   React.useEffect(() => {
@@ -63,7 +62,7 @@ const Timeline: React.FC<TimelineProps> = ({
     if (!slider) return;
     const handleScroll = () => {
       const children = Array.from(slider.children) as HTMLElement[];
-      const sliderRect = slider.getBoundingClientRect();
+
       let minDiff = Infinity;
       let closestIdx = 0;
       children.forEach((child, idx) => {
@@ -84,6 +83,15 @@ const Timeline: React.FC<TimelineProps> = ({
     return () => slider.removeEventListener('scroll', handleScroll);
   }, [steps.length]);
 
+  // Cycle through pulsing steps
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setPulsingStep((prev) => prev === 4 ? 1 : prev + 1);
+    }, 1200); // Match the pulse animation duration
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={cn("w-full max-w-6xl mx-auto p-4 sm:p-8", className)}>
       {/* Light gradient circle background */}
@@ -97,7 +105,7 @@ const Timeline: React.FC<TimelineProps> = ({
             className="h-full bg-[#3bb143]"
             initial={{ width: "0%" }}
             animate={{ 
-              width: `${((activeStep - 1) / (steps.length - 1)) * 100}%` 
+              width: "100%" 
             }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           />
@@ -107,7 +115,7 @@ const Timeline: React.FC<TimelineProps> = ({
         <div className="relative justify-between hidden sm:flex">
           {steps.map((step, index) => {
             const isActive = index + 1 === activeStep;
-            const isExpanded = step.id <= (expandedStep || 1);
+            const isExpanded = true; // Always show all content on desktop
             return (
               <motion.div
                 key={step.id}
@@ -124,33 +132,15 @@ const Timeline: React.FC<TimelineProps> = ({
                 {/* Step Indicator */}
                 <motion.div
                   className={cn(
-                    "relative flex items-center justify-center w-16 h-16 rounded-full border-4 bg-background transition-all duration-300 cursor-pointer mt-2 overflow-visible",
-                    (index < activeStep) 
-                      ? "border-[#3bb143] bg-[#3bb143] text-white" 
-                      : isActive
-                      ? "border-[#3bb143] text-[#3bb143]"
-                      : "border-muted text-muted-foreground hover:border-[#3bb143]/50"
+                    "relative flex items-center justify-center w-16 h-16 rounded-full border-4 bg-background transition-all duration-300 mt-2 overflow-visible",
+                    "border-[#3bb143] bg-[#3bb143] text-white"
                   )}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setActiveStep(step.id);
-                    setExpandedStep(step.id);
-                  }}
                 >
-                  {(index < activeStep) ? (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: index * 0.2 + 0.3 }}
-                    >
-                      <CheckIcon className="w-6 h-6" />
-                    </motion.div>
-                  ) : (
-                    <span className="text-lg font-semibold">{step.id}</span>
-                  )}
-                  {/* Active pulse effect */}
-                  {isActive && (
+                  <span className="text-lg font-semibold">{step.id}</span>
+                  {/* Pulse effect for current step only */}
+                  {step.id === pulsingStep && (
                     <motion.div
                       className="absolute inset-0 rounded-full border-4 border-[#3bb143] shadow-lg"
                       animate={{
@@ -176,15 +166,11 @@ const Timeline: React.FC<TimelineProps> = ({
                   transition={{ delay: index * 0.2 + 0.4 }}
                 >
                   <h3 className={cn(
-                    "text-xl sm:text-2xl font-semibold mb-2 transition-colors cursor-pointer",
+                    "text-xl sm:text-2xl font-semibold mb-2 transition-colors",
                     (index < activeStep) || isActive 
                       ? "text-foreground" 
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  onClick={() => {
-                    setActiveStep(step.id);
-                    setExpandedStep(step.id);
-                  }}>
+                      : "text-muted-foreground"
+                  )}>
                     {step.title}
                   </h3>
                   <motion.div
@@ -229,11 +215,7 @@ const Timeline: React.FC<TimelineProps> = ({
                 <motion.div
                   className={cn(
                     "relative flex items-center justify-center w-16 h-16 rounded-full border-4 bg-background transition-all duration-300 cursor-pointer mt-2 overflow-visible",
-                    (index < activeStep) 
-                      ? "border-[#3bb143] bg-[#3bb143] text-white" 
-                      : isActive
-                      ? "border-[#3bb143] text-[#3bb143]"
-                      : "border-muted text-muted-foreground hover:border-[#3bb143]/50"
+                    "border-[#3bb143] bg-[#3bb143] text-white"
                   )}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -298,18 +280,44 @@ const Timeline: React.FC<TimelineProps> = ({
             );
           })}
         </div>
-        {/* Mobile dots navigation */}
-        <div className="sm:hidden flex justify-center gap-2 mt-2">
-          {steps.map((_, idx) => (
-            <span
-              key={idx}
-              className={
-                idx === (activeStep - 1)
-                  ? 'inline-block w-3 h-3 rounded-full bg-[#3bb143]'
-                  : 'inline-block w-3 h-3 rounded-full border border-[#3bb143] bg-transparent'
+        {/* Mobile arrows navigation */}
+        <div className="sm:hidden flex justify-center gap-8 mt-8">
+          <button 
+            onClick={() => {
+              const newStep = activeStep > 1 ? activeStep - 1 : steps.length;
+              setActiveStep(newStep);
+              setExpandedStep(newStep);
+              // Scroll to the step
+              const slider = mobileSliderRef.current;
+              if (slider) {
+                const stepElement = slider.children[newStep - 1] as HTMLElement;
+                if (stepElement) {
+                  stepElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
               }
-            />
-          ))}
+            }}
+            className="inline-flex items-center justify-center w-12 h-12 text-[#3bb143] text-5xl font-bold hover:scale-110 transition-transform duration-200 cursor-pointer"
+          >
+            ←
+          </button>
+          <button 
+            onClick={() => {
+              const newStep = activeStep < steps.length ? activeStep + 1 : 1;
+              setActiveStep(newStep);
+              setExpandedStep(newStep);
+              // Scroll to the step
+              const slider = mobileSliderRef.current;
+              if (slider) {
+                const stepElement = slider.children[newStep - 1] as HTMLElement;
+                if (stepElement) {
+                  stepElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+              }
+            }}
+            className="inline-flex items-center justify-center w-12 h-12 text-[#3bb143] text-5xl font-bold hover:scale-110 transition-transform duration-200 cursor-pointer"
+          >
+            →
+          </button>
         </div>
       </div>
     </div>

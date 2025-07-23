@@ -19,7 +19,6 @@ const dynamicWords = [
     'Subscribers',
     'Clients',
     'Conversions',
-    'Opportunities',
     'Revenue',
     'Sales'
 ]
@@ -93,7 +92,7 @@ export function HeroSection() {
                         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none z-10" />
                         {/* Enhanced shadow overlay */}
                         <div className="absolute inset-0 rounded-xl shadow-inner pointer-events-none" />
-                        <div className="h-[400px] sm:h-[500px] overflow-y-auto">
+                        <div className="h-[400px] sm:h-[500px] overflow-y-hidden md:overflow-y-auto">
                             <MemberList />
                         </div>
                     </div>

@@ -109,8 +109,7 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
   const [animationKey, setAnimationKey] = useState(0);
   const linePathRef = useRef<SVGPathElement>(null);
   const areaPathRef = useRef<SVGPathElement>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mouseX, setMouseX] = useState<number | null>(null);
+
   const svgRef = useRef<SVGSVGElement>(null);
 
   const currentStats = revenueData[selectedTimeFrame];
@@ -157,17 +156,7 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
     }
   }, [linePath, animationKey]);
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
-      }
-    }
-  };
+
 
   const headerVariants = {
     hidden: { opacity: 0, x: -20 },
@@ -199,20 +188,7 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
   const strokeColor = '#3bb143';
   const gradientId = 'revenueGradientHero';
 
-  // Find the nearest data point to the mouse x position
-  let hoverPoint = null;
-  let hoverX = 0;
-  let hoverY = 0;
-  if (hoveredIndex !== null && currentStats.data[hoveredIndex]) {
-    hoverPoint = currentStats.data[hoveredIndex];
-    const xStep = svgWidth / (currentStats.data.length - 1);
-    hoverX = hoveredIndex * xStep;
-    const maxValue = Math.max(...currentStats.data.map(p => p.value));
-    const minValue = Math.min(...currentStats.data.map(p => p.value));
-    const valueRange = maxValue - minValue;
-    const normalizedValue = valueRange > 0 ? (currentStats.data[hoveredIndex].value - minValue) / valueRange : 0.5;
-    hoverY = svgHeight - (normalizedValue * (svgHeight * 0.8)) - (svgHeight * 0.1);
-  }
+
 
   return (
     <div className="px-4 sm:px-8 py-4 w-full max-w-full mx-auto overflow-hidden gap-0">
@@ -288,25 +264,9 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
           <svg
             ref={svgRef}
             viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-            className="w-full h-full cursor-pointer"
+            className="w-full h-full"
             preserveAspectRatio="none"
-            onMouseMove={e => {
-              const svgRect = svgRef.current?.getBoundingClientRect();
-              if (!svgRect) return;
-              const x = e.clientX - svgRect.left;
-              // Scale x to SVG viewBox
-              const scale = svgWidth / svgRect.width;
-              const svgX = x * scale;
-              setMouseX(svgX);
-              // Find nearest index
-              const xStep = svgWidth / (currentStats.data.length - 1);
-              const idx = Math.round(svgX / xStep);
-              setHoveredIndex(Math.max(0, Math.min(currentStats.data.length - 1, idx)));
-            }}
-            onMouseLeave={() => {
-              setHoveredIndex(null);
-              setMouseX(null);
-            }}
+
           >
             <defs>
               <linearGradient id="revenueGradientHero" x1="0" y1="0" x2="0" y2="1">
@@ -331,47 +291,9 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            {/* Highlight hovered point */}
-            {hoveredIndex !== null && (() => {
-              const xStep = svgWidth / (currentStats.data.length - 1);
-              const x = hoveredIndex * xStep;
-              const maxValue = Math.max(...currentStats.data.map(p => p.value));
-              const minValue = Math.min(...currentStats.data.map(p => p.value));
-              const valueRange = maxValue - minValue;
-              const normalizedValue = valueRange > 0 ? (currentStats.data[hoveredIndex].value - minValue) / valueRange : 0.5;
-              const y = svgHeight - (normalizedValue * (svgHeight * 0.8)) - (svgHeight * 0.1);
-              return <>
-                {/* Vertical guide line */}
-                <line x1={x} y1={0} x2={x} y2={svgHeight} stroke="#3bb143" strokeDasharray="4 2" strokeWidth={1} />
-                {/* Highlight dot */}
-                                  <circle cx={x} cy={y} r={8} fill="#3bb143" stroke="#fff" strokeWidth={2} />
-              </>;
-            })()}
+
           </svg>
-          {/* Tooltip */}
-          {hoveredIndex !== null && hoverPoint && svgRef.current && (() => {
-            const svgRect = svgRef.current.getBoundingClientRect();
-            const scale = svgRect.width / svgWidth;
-            const left = svgRect.left + window.scrollX + hoverX * scale;
-            return (
-              <div
-                style={{
-                  position: 'absolute',
-                  left: left,
-                  top: `${Math.max(0, hoverY * scale - 56) }px`,
-                  transform: 'translateX(-50%)',
-                  pointerEvents: 'none',
-                  zIndex: 10,
-                  minWidth: 120,
-                  maxWidth: 128,
-                }}
-                className="bg-white border border-border rounded-lg shadow-lg px-3 py-2 text-xs text-gray-900"
-              >
-                <div className="font-semibold text-sm mb-1">{hoverPoint.month}</div>
-                <div className="font-bold text-lg">{formatCurrency(hoverPoint.value)}</div>
-              </div>
-            );
-          })()}
+
         </motion.div>
       </AnimatePresence>
 

@@ -1,7 +1,9 @@
 
 import React from 'react';
 import { HeroSection } from './components/hero-section';
+import Footer from './components/footer';
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   console.log('App component is loading...');
@@ -11,11 +13,14 @@ function App() {
   }, []);
 
   return (
-    <TooltipProvider>
-      <div className="relative bg-white">
-        <HeroSection />
-      </div>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <div className="relative bg-background transition-colors duration-200 min-h-screen">
+          <HeroSection />
+          <Footer />
+        </div>
+      </TooltipProvider>
+    </ThemeProvider>
   );
 }
 
