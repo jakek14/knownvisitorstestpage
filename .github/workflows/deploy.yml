@@ -20,6 +20,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Clean up previous deployment
+        run: |
+          # Remove any previously deployed files that might cause conflicts
+          rm -f index.html
+          rm -rf assets/
+          rm -f *.js
+          rm -f *.css
+          rm -f *.png
+          rm -f *.svg
+          rm -f _redirects
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
