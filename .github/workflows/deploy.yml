@@ -20,18 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Clean up previous deployment
-        run: |
-          # Remove only built files that might cause conflicts
-          # Don't remove source files like index.html
-          rm -rf assets/
-          rm -f main-*.js
-          rm -f main-*.css
-          rm -f *.png
-          rm -f *.svg
-          rm -f _redirects
-          rm -f Klaviyo.png Google.png Big.png Woo.png Wix.png Tiktok.png Squarespace.png Snapchat.png Shopify.png Pinterest.png Meta.png vite.svg
-      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -58,13 +46,28 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
+      - name: List project files
+        run: |
+          echo "=== Project Structure ==="
+          ls -la
+          echo "=== Package.json ==="
+          cat package.json
+          echo "=== Vite Config ==="
+          cat vite.config.js
+      
       - name: Build
         run: pnpm run build
         env:
           CI: false
       
       - name: List dist contents
-        run: ls -la dist/
+        run: |
+          echo "=== Dist Contents ==="
+          ls -la dist/
+          echo "=== Index.html Content ==="
+          cat dist/index.html
+          echo "=== Assets Directory ==="
+          ls -la dist/assets/
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
