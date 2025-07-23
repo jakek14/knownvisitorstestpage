@@ -1,18 +1,21 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { Mail, Send, Menu, ArrowRight, Check } from 'lucide-react'
+import { Mail, Send, Menu, ArrowRight, Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 import { WavyBackground } from '@/components/ui/wavy-background'
 import MemberList from '@/components/ui/member-list'
 import { motion } from 'framer-motion'
-import { DisplayCards, type DisplayCardProps } from "@/components/ui/display-cards";
+import { DisplayCards } from "@/components/ui/display-cards";
 import { AlertTriangle } from "lucide-react";
 import RevenueLineGraph from "./RevenueLineGraph";
 import type { ChangeEvent } from 'react';
-import HyperText from "@/components/ui/hyper-text";
+import { HyperText } from "@/components/ui/hyper-text";
 import ImageAutoSlider from "@/components/ui/image-auto-slider";
 import Timeline from "@/components/ui/timeline-demo";
+import { TiltedScroll } from "./ui/tilted-scroll";
+import { ThreeDPhotoCarousel } from "./ui/3d-carousel";
+import { LockAnimation } from "./ui/lock-animation";
 
 const dynamicWords = [
     'Leads',
@@ -94,7 +97,7 @@ export function HeroSection() {
     };
 
     return (
-        <div className="relative bg-white">
+        <div className="relative bg-white" data-hero-section>
             {/* Hero Section with Wavy Background */}
             <WavyBackground 
                 backgroundFill="white"
@@ -120,7 +123,7 @@ export function HeroSection() {
                         </h1>
 
                         <p className="mx-auto mt-8 sm:mt-6 max-w-2xl text-pretty text-xl sm:text-lg text-black text-center">
-                            KnownVisitor identifies your anonymous website visitors and provides their email and postal addresses—even if they never filled out a form. Transform lost traffic into actionable contact data.
+                            KnownVisitors identifies your anonymous website visitors even if they never filled out a form. Transform lost traffic into actionable contact data.
                         </p>
 
                         <form onSubmit={handleSubmit} className="mt-12 sm:mt-12 mx-auto max-w-md text-center">
@@ -148,7 +151,7 @@ export function HeroSection() {
                                                 disabled={isLoading || isSubmitted}
                                             />
                                         </div>
-                                        
+
                                         {/* Submit button */}
                                         <div className="flex-shrink-0">
                                             <Button
@@ -201,8 +204,11 @@ export function HeroSection() {
 
             {/* Text Bar Section */}
             <div
-                className="py-16 mt-32"
-                style={{ background: 'linear-gradient(90deg, #3bb143 0%, #2d8a35 50%, #4caf50 100%)' }}
+                className="py-16 mt-32 relative overflow-hidden animate-gradient"
+                style={{ 
+                    background: 'linear-gradient(90deg, #22c55e 0%, #16a34a 25%, #15803d 50%, #166534 75%, #14532d 100%)',
+                    backgroundSize: '200% 100%'
+                }}
             >
                 <div className="max-w-6xl mx-auto px-4 text-center">
                     <motion.p
@@ -222,7 +228,7 @@ export function HeroSection() {
 
             {/* Multirow Product Description Section */}
             <section className="relative pt-16 pb-16">
-              <div className="bg-gray-50 pb-16 pt-16 -mt-16">
+              <div className="bg-gray-50 pb-32 pt-16 -mt-16">
                 <div className="max-w-7xl mx-auto px-6">
                   <h2 className="text-4xl sm:text-7xl font-bold text-center mb-24 text-black leading-tight pt-10">
                     Understand Your Customers<br />
@@ -275,7 +281,7 @@ export function HeroSection() {
                       <div className="w-full">
                         <h4 className="text-2xl font-bold text-green-600 mb-4">See Who's Visiting</h4>
                         <h3 className="text-4xl font-bold mb-8 text-gray-900">Visitor Recognition</h3>
-                        <p className="text-2xl text-gray-700 mb-4">With a single pixel, knownvisitor.com reveals the full picture of your website traffic — surfacing both known customers and previously anonymous visitors as they arrive.</p>
+                        <p className="text-2xl text-gray-700 mb-4">With a single pixel, knownvisitors.com reveals the full picture of your website traffic — surfacing both known customers and previously anonymous visitors as they arrive.</p>
                       </div>
                     </motion.div>
                     {/* Row 2 (flipped order) */}
@@ -292,8 +298,8 @@ export function HeroSection() {
                         <p className="text-2xl text-gray-700 mb-4">Many of your highest-value shoppers never log in.</p>
                         <p className="text-2xl text-gray-700">Now you can identify these anonymous browsers and deliver 5x more personalized outreach — from emails and texts to push notifications.</p>
                       </div>
-                      <div className="order-1 md:order-2 w-full flex justify-center rounded-xl shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-                        <div className="w-full">
+                      <div className="order-1 md:order-2 w-full flex justify-center rounded-xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-3xl overflow-hidden">
+                        <div className="w-full overflow-hidden">
                           {/* Manually recreated header */}
                           <div className="flex justify-between items-center mb-2 w-full px-4 pt-4">
                             <div className="flex items-center gap-2">
@@ -337,7 +343,7 @@ export function HeroSection() {
                       <div className="w-full">
                         <h4 className="text-2xl font-bold text-green-600 mb-4">Works with Your Tools</h4>
                         <h3 className="text-4xl font-bold mb-8 text-gray-900">Plug and Play with Your Current Stack</h3>
-                        <p className="text-2xl text-gray-700 mb-4">knownvisitor.com integrates effortlessly with your favorite ecommerce, CRM, and marketing platforms.</p>
+                        <p className="text-2xl text-gray-700 mb-4">knownvisitors.com integrates effortlessly with your favorite ecommerce, CRM, and marketing platforms.</p>
                         <p className="text-2xl text-gray-700">Feed real-time visitor data into your existing systems to sharpen targeting, boost personalization, and increase ROI from channels you control.</p>
                       </div>
                     </motion.div>
@@ -346,8 +352,346 @@ export function HeroSection() {
               </div>
             </section>
 
+            {/* Data Cards Section */}
+            <section className="relative -mt-[4rem] sm:-mt-[6rem] pt-32 sm:pt-24 pb-64 bg-white">
+                <div className="relative mx-auto max-w-7xl px-4 sm:px-6 z-20">
+                    {/* Light gradient circle behind the container */}
+                    <div className="absolute -right-48 top-1/2 transform -translate-y-1/2 pointer-events-none z-0">
+                        <div className="w-96 h-96 rounded-full bg-gradient-to-br from-green-300/40 via-green-400/30 to-green-300/20 blur-3xl"></div>
+                    </div>
+                    <motion.div 
+                        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="bg-white rounded-2xl p-8 sm:p-16 shadow-2xl border border-gray-200 hover:shadow-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:rotate-1 hidden sm:block relative z-30" 
+                        style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.boxShadow = '0 35px 70px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.05)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)';
+                        }}
+                    >
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            {/* Content */}
+                            <div>
+                                <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900">Data you can act on, instantly</h2>
+                                <p className="text-xl sm:text-lg text-gray-600 mb-8">
+                                    Your dashboard shouldn't just display numbers — it should unlock insight.
+                                </p>
+                                
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">See Emails, Phone Numbers, and More</h3>
+                                        <p className="text-gray-600">
+                                            Instantly access verified customer data, from contact info to behavioral traits.
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">Uncover Postal Codes and Location</h3>
+                                        <p className="text-gray-600">
+                                            Localize outreach and segment based on visitor geography.
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">Filter, Sort, and Export</h3>
+                                        <p className="text-gray-600">
+                                            Use smart filters or export enriched data to your CRM, ESP, or ad platforms.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Dashboard Image */}
+                            <div>
+                                <div className="w-full max-w-xl mx-auto bg-white rounded-xl shadow-2xl border overflow-hidden relative transform hover:scale-[1.02] transition-all duration-300" style={{ transform: 'perspective(1000px) rotateY(-15deg) rotateX(5deg)' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(-15deg) rotateX(5deg)'}>
+                                    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-10" />
+                                    <div className="absolute inset-0 rounded-xl shadow-inner pointer-events-none" />
+                                    <div className="h-[200px] sm:h-[250px] overflow-x-auto overflow-y-hidden">
+                                        <div className="w-full relative">
+                                          {/* Desktop Table - 3 columns only */}
+                                          <div className="hidden md:block">
+                                            <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                                              {/* Header */}
+                                              <div className="bg-gray-50 grid grid-cols-[1fr_0.8fr_2fr]">
+                                                <div className="py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Name
+                                                  </div>
+                                                </div>
+                                                <div className="py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Phone
+                                                  </div>
+                                                </div>
+                                                <div className="px-4 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Email
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                              {/* Content */}
+                                              <div className="bg-white divide-y divide-gray-200">
+                                                {[
+                                                  { id: 1, name: "John Smith", email: "john.smith@techcorp.com", phone: "+1 (555) 123-4567" },
+                                                  { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com", phone: "+1 (555) 234-5678" },
+                                                  { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com", phone: "+1 (555) 345-6789" },
+                                                  { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com", phone: "+1 (555) 456-7890" },
+                                                  { id: 5, name: "David Brown", email: "david.brown@consulting.com", phone: "+1 (555) 567-8901" }
+                                                ].map((member) => (
+                                                  <div key={member.id} className="grid grid-cols-[1fr_0.8fr_2fr] hover:bg-gray-50">
+                                                    <div className="py-2 whitespace-nowrap text-sm font-medium text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.name}
+                                                      </div>
+                                                    </div>
+                                                    <div className="py-2 whitespace-nowrap text-sm text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.phone}
+                                                      </div>
+                                                    </div>
+                                                    <div className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.email}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          {/* Mobile Table - Names and Emails only */}
+                                          <div className="md:hidden">
+                                            <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                                              {/* Header */}
+                                              <div className="bg-gray-50 grid grid-cols-[0.8fr_1.2fr]">
+                                                <div className="py-1 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Name
+                                                  </div>
+                                                </div>
+                                                <div className="py-1 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Email
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                              {/* Content */}
+                                              <div className="bg-white divide-y divide-gray-200">
+                                                {[
+                                                  { id: 1, name: "John Smith", email: "john.smith@techcorp.com" },
+                                                  { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com" },
+                                                  { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com" },
+                                                  { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com" },
+                                                  { id: 5, name: "David Brown", email: "david.brown@consulting.com" },
+                                                  { id: 6, name: "Lisa Garcia", email: "lisa.garcia@digitalagency.com" },
+                                                  { id: 7, name: "Alex Chen", email: "alex.chen@innovate.com" },
+                                                  { id: 8, name: "Maria Rodriguez", email: "maria.r@creative.com" }
+                                                ].map((member) => (
+                                                  <div key={member.id} className="grid grid-cols-[0.8fr_1.2fr] hover:bg-gray-50">
+                                                    <div className="py-1 whitespace-nowrap text-xs font-medium text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.name}
+                                                      </div>
+                                                    </div>
+                                                    <div className="py-1 whitespace-nowrap text-xs text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.email}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          {/* Export button positioned in top right corner */}
+                                          <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="absolute top-2 right-2 h-8 w-8 p-0 bg-white border-gray-300 hover:bg-gray-50 shadow-sm"
+                                          >
+                                            <Download className="h-4 w-4" />
+                                          </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                    
+                    {/* Mobile version without card hover animation */}
+                    <motion.div 
+                        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="bg-white rounded-2xl p-8 sm:p-16 shadow-2xl border border-gray-200 block sm:hidden relative z-30" 
+                        style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05)' }}
+                    >
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            {/* Content */}
+                            <div>
+                                <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900">Data you can act on, instantly</h2>
+                                <p className="text-xl sm:text-lg text-gray-600 mb-8">
+                                    Your dashboard shouldn't just display numbers — it should unlock insight.
+                                </p>
+                                
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">See Emails, Phone Numbers, and More</h3>
+                                        <p className="text-gray-600">
+                                            Instantly access verified customer data, from contact info to behavioral traits.
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">Uncover Postal Codes and Location</h3>
+                                        <p className="text-gray-600">
+                                            Localize outreach and segment based on visitor geography.
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-2 text-gray-900">Filter, Sort, and Export</h3>
+                                        <p className="text-gray-600">
+                                            Use smart filters or export enriched data to your CRM, ESP, or ad platforms.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Dashboard Image */}
+                            <div>
+                                <div className="w-full max-w-xl mx-auto bg-white rounded-xl shadow-2xl border overflow-hidden relative transform hover:scale-[1.02] transition-all duration-300" style={{ transform: 'perspective(1000px) rotateY(-15deg) rotateX(5deg)' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(-15deg) rotateX(5deg)'}>
+                                    <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none z-10" />
+                                    <div className="absolute inset-0 rounded-xl shadow-inner pointer-events-none" />
+                                    <div className="h-[200px] sm:h-[250px] overflow-x-auto overflow-y-hidden">
+                                        <div className="w-full relative">
+                                          {/* Desktop Table - 3 columns only */}
+                                          <div className="hidden md:block">
+                                            <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                                              {/* Header */}
+                                              <div className="bg-gray-50 grid grid-cols-[1fr_0.8fr_2fr]">
+                                                <div className="py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Name
+                                                  </div>
+                                                </div>
+                                                <div className="py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Phone
+                                                  </div>
+                                                </div>
+                                                <div className="px-4 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Email
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                              {/* Content */}
+                                              <div className="bg-white divide-y divide-gray-200">
+                                                {[
+                                                  { id: 1, name: "John Smith", email: "john.smith@techcorp.com", phone: "+1 (555) 123-4567" },
+                                                  { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com", phone: "+1 (555) 234-5678" },
+                                                  { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com", phone: "+1 (555) 345-6789" },
+                                                  { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com", phone: "+1 (555) 456-7890" },
+                                                  { id: 5, name: "David Brown", email: "david.brown@consulting.com", phone: "+1 (555) 567-8901" }
+                                                ].map((member) => (
+                                                  <div key={member.id} className="grid grid-cols-[1fr_0.8fr_2fr] hover:bg-gray-50">
+                                                    <div className="py-2 whitespace-nowrap text-sm font-medium text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.name}
+                                                      </div>
+                                                    </div>
+                                                    <div className="py-2 whitespace-nowrap text-sm text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.phone}
+                                                      </div>
+                                                    </div>
+                                                    <div className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.email}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          {/* Mobile Table - Names and Emails only */}
+                                          <div className="md:hidden">
+                                            <div className="w-full border border-gray-200 rounded-lg overflow-hidden">
+                                              {/* Header */}
+                                              <div className="bg-gray-50 grid grid-cols-[0.8fr_1.2fr]">
+                                                <div className="py-1 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Name
+                                                  </div>
+                                                </div>
+                                                <div className="py-1 text-xs font-medium text-gray-500 uppercase tracking-wider flex justify-center">
+                                                  <div className="text-left">
+                                                    Email
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                              {/* Content */}
+                                              <div className="bg-white divide-y divide-gray-200">
+                                                {[
+                                                  { id: 1, name: "John Smith", email: "john.smith@techcorp.com" },
+                                                  { id: 2, name: "Sarah Johnson", email: "sarah.j@designstudio.com" },
+                                                  { id: 3, name: "Mike Wilson", email: "mike.wilson@marketingpro.com" },
+                                                  { id: 4, name: "Emily Davis", email: "emily.d@startupinc.com" },
+                                                  { id: 5, name: "David Brown", email: "david.brown@consulting.com" },
+                                                  { id: 6, name: "Lisa Garcia", email: "lisa.garcia@digitalagency.com" },
+                                                  { id: 7, name: "Alex Chen", email: "alex.chen@innovate.com" },
+                                                  { id: 8, name: "Maria Rodriguez", email: "maria.r@creative.com" }
+                                                ].map((member) => (
+                                                  <div key={member.id} className="grid grid-cols-[0.8fr_1.2fr] hover:bg-gray-50">
+                                                    <div className="py-1 whitespace-nowrap text-xs font-medium text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.name}
+                                                      </div>
+                                                    </div>
+                                                    <div className="py-1 whitespace-nowrap text-xs text-gray-900 flex justify-center">
+                                                      <div className="text-left">
+                                                        {member.email}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                ))}
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          {/* Export button positioned in top right corner */}
+                                          <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="absolute top-2 right-2 h-8 w-8 p-0 bg-white border-gray-300 hover:bg-gray-50 shadow-sm"
+                                          >
+                                            <Download className="h-4 w-4" />
+                                          </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
             {/* Setup Made Simple Section */}
-            <section className="relative pt-8 sm:pt-12 pb-0 sm:pb-0 bg-white">
+            <section className="relative -mt-8 sm:-mt-12 pb-0 sm:pb-0 bg-white">
               <div className="relative mx-auto max-w-full px-0 z-10">
                 <div className="text-center mb-0 pb-0 sm:mb-4">
                   <h2 className="text-4xl sm:text-6xl font-bold mb-4 sm:mb-3 text-gray-900">Setup Made Simple</h2>
@@ -356,110 +700,114 @@ export function HeroSection() {
                     <span className="hidden sm:inline">Quick setup. Instant visibility. Smarter marketing.</span>
                   </div>
                 </div>
-                <div className="-mt-6 sm:mt-10">
+                <div className="-mt-12 sm:-mt-8">
                   <Timeline />
                 </div>
               </div>
             </section>
             {/* End Setup Made Simple Section */}
 
-            {/* Extended Content Section */}
-            <section className="relative py-24 sm:py-32 bg-white -mt-64">
-                <div className="relative mx-auto max-w-6xl px-4 sm:px-6 z-10">
-                    {/* Core Capabilities Section */}
-                    <div className="text-center mb-12 sm:mb-16">
-                        <h2 className="text-4xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-900">Core Capabilities</h2>
-                        <p className="text-xl sm:text-lg text-gray-600 max-w-3xl mx-auto">
-                            Transform your anonymous website traffic into actionable contact data with our patent-pending platform.
-                        </p>
-                    </div>
-
-                    {/* Features Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                                <Mail className="w-6 h-6 text-blue-600" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">Email Discovery</h3>
-                            <p className="text-gray-600">
-                                Automatically identify and capture email addresses from anonymous website visitors.
+            {/* Cards Section - L-Shape Layout */}
+            <section className="relative -mt-[20rem] sm:-mt-[35rem] bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-30">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+                        {/* Card 3 - Vertical, Left Side */}
+                        <div className="bg-white rounded-2xl p-8 shadow-2xl border border-gray-200 hover:shadow-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 relative z-30">
+                            <h3 className="text-3xl font-bold text-gray-900 mb-4">Your Hidden Funnel Just Got Exposed</h3>
+                            <p className="text-lg text-gray-600 mb-6">
+                                You're only seeing a fraction of your funnel. KnownVisitors uncovers who's actually moving through it.
                             </p>
-                        </div>
-
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                                <Send className="w-6 h-6 text-blue-600" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">Lead Generation</h3>
-                            <p className="text-gray-600">
-                                Convert anonymous traffic into qualified leads with detailed contact information.
-                            </p>
-                        </div>
-
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                                <Menu className="w-6 h-6 text-blue-600" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">Advanced Analytics</h3>
-                            <p className="text-gray-600">
-                                Track visitor behavior and engagement patterns to optimize your conversion strategy.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Benefits Section */}
-                    <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200 mb-16">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                            <div>
-                                <h3 className="text-2xl font-bold mb-4 text-gray-900">Why Choose KnownVisitor?</h3>
-                                <ul className="space-y-3">
-                                    <li className="flex items-start gap-3">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                                        <span className="text-gray-600">Patent-pending technology for accurate identification</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                                        <span className="text-gray-600">GDPR and privacy compliant data collection</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                                        <span className="text-gray-600">Real-time visitor tracking and notifications</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                                        <span className="text-gray-600">Seamless integration with your existing tools</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-                                <h4 className="text-lg font-semibold mb-3 text-gray-900">Ready to Get Started?</h4>
-                                <p className="text-gray-600 mb-4">
-                                    Join thousands of businesses already using KnownVisitor to transform their anonymous traffic into valuable leads.
-                                </p>
-                                <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
-                                    Start Free Trial
-                                </Button>
+                            <div className="h-[16rem] rounded-xl flex items-center justify-center">
+                                <LockAnimation 
+                                    size={1.5}
+                                    autoAnimate={true}
+                                    autoAnimateInterval={4000}
+                                />
                             </div>
                         </div>
-                    </div>
 
-                    {/* Stats Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="text-3xl font-bold text-green-600 mb-2">10K+</div>
-                            <div className="text-gray-600">Active Users</div>
-                        </div>
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="text-3xl font-bold text-green-600 mb-2">1M+</div>
-                            <div className="text-gray-600">Leads Generated</div>
-                        </div>
-                        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-                            <div className="text-3xl font-bold text-green-600 mb-2">99.9%</div>
-                            <div className="text-gray-600">Accuracy Rate</div>
+                        {/* Right Side Container */}
+                        <div className="lg:col-span-2 space-y-6">
+                                                        {/* Card 1 - Top */}
+                            <div className="bg-white rounded-2xl p-8 shadow-2xl border border-gray-200 hover:shadow-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 relative z-30">
+                                <div className="flex flex-col lg:flex-row items-center gap-6">
+                                    <div className="flex-1 w-full lg:w-auto">
+                                        <h3 className="text-3xl font-bold text-gray-900 mb-4">Effortless List Growth</h3>
+                                        <p className="text-lg text-gray-600 mb-6">
+                                            Grow your email and SMS lists with real, high-intent contacts — without relying on popups or gated content.
+                                        </p>
+                                    </div>
+                                    <div className="flex-1 w-full lg:w-auto">
+                                        <div className="h-40 rounded-xl flex items-center justify-center">
+                                            <TiltedScroll className="scale-75" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 2 - Bottom */}
+                            <div className="bg-white rounded-2xl p-8 shadow-2xl border border-gray-200 hover:shadow-3xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 relative z-30">
+                                <div className="flex flex-col lg:flex-row items-center gap-6">
+                                    <div className="flex-1 w-full lg:w-auto">
+                                        <h3 className="text-3xl font-bold text-gray-900 mb-4">Fits Right Into Your Workflow</h3>
+                                        <p className="text-lg text-gray-600 mb-6">
+                                            No need to change your tools — just enhance them. KnownVisitors plugs into your existing marketing setup.
+                                        </p>
+                                    </div>
+                                    <div className="flex-1 w-full lg:w-auto">
+                                        <div className="h-40 rounded-xl flex items-center justify-center bg-transparent">
+                                            <div className="grid grid-cols-4 gap-3 p-4">
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Meta.png" alt="Meta" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Snapchat.png" alt="Snapchat" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Google.png" alt="Google" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Tiktok.png" alt="TikTok" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Wix.png" alt="Wix" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Shopify.png" alt="Shopify" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Squarespace.png" alt="Squarespace" className="w-12 h-12 object-contain" />
+                                                </div>
+                                                <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
+                                                    <img src="/Big.png" alt="Big" className="w-12 h-12 object-contain" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                {/* Join Waitlist Button */}
+                <div className="text-center mt-16">
+                    <Button 
+                        variant="outline"
+                        onClick={() => {
+                            const heroSection = document.querySelector('[data-hero-section]');
+                            if (heroSection) {
+                                heroSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="bg-green-600 hover:bg-green-700 text-white hover:text-white rounded-2xl px-12 py-6 font-semibold text-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:shadow-3xl border-green-600 relative overflow-hidden group shadow-[0_8px_0_rgb(22,163,74)] hover:shadow-[0_4px_0_rgb(22,163,74)] hover:translate-y-1"
+                    >
+                        <span className="relative z-10">Join the Waitlist</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </Button>
+                </div>
             </section>
+
             {/* Bottom spacing to ensure scrollability */}
             <div className="h-20"></div>
         </div>

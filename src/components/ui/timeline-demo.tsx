@@ -22,7 +22,7 @@ const defaultSteps: TimelineStep[] = [
   {
     id: 1,
     title: "Add the Pixel",
-    description: "Copy your KnownVisitor pixel into your site's <head> or use your tag manager.",
+            description: "Copy your KnownVisitors pixel into your site's <head> or use your tag manager.",
     completed: true
   },
   {
@@ -86,7 +86,11 @@ const Timeline: React.FC<TimelineProps> = ({
 
   return (
     <div className={cn("w-full max-w-6xl mx-auto p-4 sm:p-8", className)}>
-      <div className="relative">
+      {/* Light gradient circle background */}
+      <div className="absolute inset-0 flex items-center justify-start pointer-events-none z-0">
+        <div className="w-96 h-96 rounded-full bg-gradient-to-br from-green-300/40 via-green-400/30 to-green-300/20 blur-3xl ml-32"></div>
+      </div>
+      <div className="relative z-10">
         {/* Progress Line (desktop only) */}
         <div className="absolute top-8 left-0 w-full h-0.5 bg-border hidden sm:block">
           <motion.div

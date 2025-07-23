@@ -215,7 +215,7 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
   }
 
   return (
-    <div className="px-8 py-4 w-full min-w-[350px] mx-auto overflow-visible gap-0">
+    <div className="px-4 sm:px-8 py-4 w-full max-w-full mx-auto overflow-hidden gap-0">
       {/* Header */}
       <motion.div 
         className="flex justify-between items-center mb-0 w-full"
@@ -377,7 +377,7 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
 
       {/* Data Points */}
       <motion.div 
-        className="flex justify-between mt-2 text-xs text-muted-foreground"
+        className="flex justify-between mt-2 text-xs text-muted-foreground overflow-hidden"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -385,13 +385,13 @@ const RevenueLineGraph: React.FC<RevenueLineGraphProps> = ({ selectedTimeFrame }
         {currentStats.data.slice(-5).map((point, index) => (
           <motion.div 
             key={point.month}
-            className="text-center"
+            className="text-center flex-1 min-w-0 px-1"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
           >
-            <div className="font-medium">{formatCurrency(point.value)}</div>
-            <div className="text-muted-foreground/70">{point.month}</div>
+            <div className="font-medium truncate">{formatCurrency(point.value)}</div>
+            <div className="text-muted-foreground/70 truncate">{point.month}</div>
           </motion.div>
         ))}
       </motion.div>

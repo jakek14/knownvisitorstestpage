@@ -55,7 +55,6 @@ const ImageAutoSlider: React.FC = () => {
         }
         .image-item:hover {
           transform: scale(1.25) translateY(-10px);
-          filter: brightness(1.3) contrast(1.1);
           z-index: 10;
         }
       `}</style>
@@ -65,7 +64,7 @@ const ImageAutoSlider: React.FC = () => {
             {duplicatedImages.map((image, index) => (
               <div
                 key={index}
-                className="image-item flex-shrink-0 w-24 h-24 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden bg-transparent border-none shadow-none outline-none flex items-center justify-center"
+                className="image-item flex-shrink-0 w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden bg-transparent border-none shadow-none outline-none flex items-center justify-center"
                 style={{ boxShadow: 'none', border: 'none', outline: 'none', background: 'transparent' }}
               >
                 <img
