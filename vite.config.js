@@ -1,15 +1,13 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
-import { plugin as phionPlugin } from "phion"
 import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/knownvisitorstestpage/' : '/',
   plugins: [
-    react(), 
-    process.env.NODE_ENV === 'development' ? phionPlugin() : null
-  ].filter(Boolean),
+    react()
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
