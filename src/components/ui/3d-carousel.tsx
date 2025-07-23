@@ -60,14 +60,14 @@ export function useMediaQuery(
 
 // Using images from public folder
 const images = [
-  "/Klaviyo.png",
-  "/Google.png", 
-  "/Big.png",
-  "/Woo.png",
-  "/Wix.png",
-  "/Tiktok.png",
-  "/Squarespace.png",
-  "/Snapchat.png",
+  "./Klaviyo.png",
+  "./Google.png", 
+  "./Big.png",
+  "./Woo.png",
+  "./Wix.png",
+  "./Tiktok.png",
+  "./Squarespace.png",
+  "./Snapchat.png",
 ]
 
 const duration = 0.15

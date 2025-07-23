@@ -1,17 +1,17 @@
 import React from "react";
 
 const images = [
-  "/Klaviyo.png",
-  "/Google.png",
-  "/Big.png",
-  "/Woo.png",
-  "/Wix.png",
-  "/Tiktok.png",
-  "/Squarespace.png",
-  "/Snapchat.png",
-  "/Shopify.png",
-  "/Pinterest.png",
-  "/Meta.png"
+  "./Klaviyo.png",
+  "./Google.png",
+  "./Big.png",
+  "./Woo.png",
+  "./Wix.png",
+  "./Tiktok.png",
+  "./Squarespace.png",
+  "./Snapchat.png",
+  "./Shopify.png",
+  "./Pinterest.png",
+  "./Meta.png"
 ];
 
 const duplicatedImages = [...images, ...images];

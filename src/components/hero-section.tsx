@@ -757,28 +757,28 @@ export function HeroSection() {
                                         <div className="h-40 rounded-xl flex items-center justify-center bg-transparent">
                                             <div className="grid grid-cols-4 gap-3 p-4">
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Meta.png" alt="Meta" className="w-12 h-12 object-contain" />
+                                                    <img src="./Meta.png" alt="Meta" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Snapchat.png" alt="Snapchat" className="w-12 h-12 object-contain" />
+                                                    <img src="./Snapchat.png" alt="Snapchat" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Google.png" alt="Google" className="w-12 h-12 object-contain" />
+                                                    <img src="./Google.png" alt="Google" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Tiktok.png" alt="TikTok" className="w-12 h-12 object-contain" />
+                                                    <img src="./Tiktok.png" alt="TikTok" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Wix.png" alt="Wix" className="w-12 h-12 object-contain" />
+                                                    <img src="./Wix.png" alt="Wix" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Shopify.png" alt="Shopify" className="w-12 h-12 object-contain" />
+                                                    <img src="./Shopify.png" alt="Shopify" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Squarespace.png" alt="Squarespace" className="w-12 h-12 object-contain" />
+                                                    <img src="./Squarespace.png" alt="Squarespace" className="w-12 h-12 object-contain" />
                                                 </div>
                                                 <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:-translate-y-1" style={{ boxShadow: '0 10px 25px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.1)' }}>
-                                                    <img src="/Big.png" alt="Big" className="w-12 h-12 object-contain" />
+                                                    <img src="./Big.png" alt="Big" className="w-12 h-12 object-contain" />
                                                 </div>
                                             </div>
                                         </div>
