@@ -1,60 +1,106 @@
-# 🚀 Your Website Project
+# KnownVisitor Waitlist
 
-Welcome to your new website! Everything is set up and ready to go. You can start editing right away.
+A modern, responsive landing page for KnownVisitor - a service that identifies anonymous website visitors and turns them into actionable leads.
 
-## ✨ What You Can Do
+## 🚀 Features
 
-This project includes everything you need to build a modern website:
+- **Modern Design**: Clean, professional landing page with smooth animations
+- **Responsive**: Works perfectly on desktop, tablet, and mobile devices
+- **Interactive Elements**: 
+  - Animated hero section with dynamic text
+  - Interactive timeline
+  - Hover effects and micro-interactions
+  - Email signup form
+- **Built with**: React, TypeScript, Vite, Tailwind CSS, Framer Motion
 
-- **Easy editing** - Change text, colors, and layout
-- **Live preview** - See changes instantly as you type
-- **Beautiful components** - Pre-built buttons, cards, and more
-- **Auto-sync** - Your changes save automatically to the cloud
-- **Live website** - Share your site with anyone, anywhere
+## 🛠️ Tech Stack
 
-## 🚀 Quick Start
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **UI Components**: shadcn/ui components
+- **Icons**: Lucide React
+- **Charts**: Recharts
 
-> 🆕 **First time?** The VS Code extension will automatically set up everything when you open this project.
+## 📦 Installation
 
-### 1. Start Building
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd knownvisitor-waitlist
+   ```
 
-```bash
-pnpm start
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   pnpm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   ```
+
+4. **Build for production**
+   ```bash
+   npm run build
+   # or
+   pnpm build
+   ```
+
+## 🚀 Deployment
+
+This project is configured for GitHub Pages deployment with automatic builds via GitHub Actions.
+
+### Manual Deployment
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to your hosting service
+
+### GitHub Pages
+The repository includes a GitHub Actions workflow that automatically builds and deploys to GitHub Pages on every push to the main branch.
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── ui/             # shadcn/ui components
+│   ├── hero-section.tsx # Main hero section
+│   └── RevenueLineGraph.tsx # Revenue chart component
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+├── main.tsx           # App entry point
+└── App.tsx            # Main App component
 ```
 
-This will:
+## 🎨 Customization
 
-- Set up everything you need automatically
-- Start your website at `http://localhost:5173`
-- Sync your changes to the cloud
-- Set up browser integration in Cursor
+- **Colors**: Update the green theme in `tailwind.config.js`
+- **Content**: Modify text content in `src/components/hero-section.tsx`
+- **Animations**: Adjust animation parameters in component files
+- **Styling**: Use Tailwind classes for quick styling changes
 
-### 2. Start Creating!
+## 📱 Responsive Design
 
-- Edit files in the `src/` folder
-- See changes instantly in your browser
-- Your live website updates automatically
-- Use the toolbar in the bottom-right to save changes
+The site is fully responsive with breakpoints:
+- Mobile: < 640px
+- Tablet: 640px - 1024px  
+- Desktop: > 1024px
 
-## 📱 Opening Your Website
+## 🔧 Development
 
-**To see your website in Cursor:**
+- **Type Checking**: `npm run type-check`
+- **Linting**: `npm run lint`
+- **Preview Build**: `npm run preview`
 
-```bash
-pnpm start
-```
+## 📄 License
 
-**To control your project:**
+This project is private and proprietary.
 
-- Press `Cmd+Shift+P` in Cursor
-- Type "Start Project" to run the setup
-- Type "Open Preview" to see your website
+---
 
-## 🛠 Available Commands
-
-- `pnpm start` - 🚀 Start everything (recommended)
-- `pnpm dev` - Start only the local preview
-- `pnpm sync` - Start only the cloud sync
-- `pnpm build` - 📦 Build your website for sharing
-
-Happy building! 🎉
+Built with ❤️ using modern web technologies
