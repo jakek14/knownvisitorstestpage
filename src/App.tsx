@@ -6,7 +6,6 @@ function App() {
   return (
     <TooltipProvider>
       <div className="relative bg-white">
-        {/* Full KnownVisitor Waitlist Page */}
         <HeroSection />
       </div>
     </TooltipProvider>

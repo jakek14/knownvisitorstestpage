@@ -5,7 +5,7 @@ import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/knownvisitorstestpage/',
+  base: process.env.NODE_ENV === 'production' ? '/knownvisitorstestpage/' : '/',
   plugins: [
     react(), 
     process.env.NODE_ENV === 'development' ? phionPlugin() : null
