@@ -353,7 +353,7 @@ export function HeroSection() {
             </section>
 
             {/* Data Cards Section */}
-            <section className="relative -mt-[4rem] sm:-mt-[6rem] pt-32 sm:pt-24 pb-64 bg-white">
+            <section className="relative -mt-[2rem] sm:-mt-[3rem] pt-32 sm:pt-24 pb-64 bg-white">
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 z-20">
                     {/* Light gradient circle behind the container */}
                     <div className="absolute -right-48 top-1/2 transform -translate-y-1/2 pointer-events-none z-0">
@@ -691,7 +691,7 @@ export function HeroSection() {
             </section>
 
             {/* Setup Made Simple Section */}
-            <section className="relative -mt-8 sm:-mt-12 pb-0 sm:pb-0 bg-white">
+            <section className="relative -mt-4 sm:-mt-8 pb-0 sm:pb-0 bg-white">
               <div className="relative mx-auto max-w-full px-0 z-10">
                 <div className="text-center mb-0 pb-0 sm:mb-4">
                   <h2 className="text-4xl sm:text-6xl font-bold mb-4 sm:mb-3 text-gray-900">Setup Made Simple</h2>
@@ -708,7 +708,7 @@ export function HeroSection() {
             {/* End Setup Made Simple Section */}
 
             {/* Cards Section - L-Shape Layout */}
-            <section className="relative -mt-[20rem] sm:-mt-[35rem] bg-white">
+            <section className="relative -mt-[20rem] sm:-mt-[24rem] bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-30">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                         {/* Card 3 - Vertical, Left Side */}
