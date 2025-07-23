@@ -1,4 +1,3 @@
-'use client'
 import React, { useState, useEffect } from 'react'
 import { Mail, Send, Menu, ArrowRight, Check, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
