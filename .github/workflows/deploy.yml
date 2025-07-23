@@ -8,8 +8,11 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
-      contents: write
+      contents: read
       pages: write
       id-token: write
     
@@ -51,20 +54,14 @@ jobs:
       - name: List dist contents
         run: ls -la dist/
       
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+      
       - name: Deploy to GitHub Pages
-        run: |
-          # Copy built files to root
-          cp -r dist/* .
-          
-          # Configure git
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # Add all files
-          git add .
-          
-          # Commit
-          git commit -m "Deploy to GitHub Pages" || echo "No changes to commit"
-          
-          # Push
-          git push 
+        id: deployment
+        uses: actions/deploy-pages@v4 
