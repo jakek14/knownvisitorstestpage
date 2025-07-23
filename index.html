@@ -1,16 +1,38 @@
 <!doctype html>
-  <html lang="en">
-
-    <head>
-      <meta charset="UTF-8" />
-      <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Phion Project</title>
-    </head>
-
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-
-  </html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KnownVisitor Waitlist</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Phion scripts - only load in development -->
+    <script>
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        // Clear any cached toolbar resources
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            names.forEach(name => {
+              if (name.includes('phion') || name.includes('toolbar')) {
+                caches.delete(name);
+              }
+            });
+          });
+        }
+        
+        // Load phion scripts only in development
+        const phionScript = document.createElement('script');
+        phionScript.src = '/phion/config.js?v=' + Date.now() + '&_cb=' + Date.now() + '&rand=' + Math.random();
+        document.body.appendChild(phionScript);
+        
+        const toolbarScript = document.createElement('script');
+        toolbarScript.src = '/phion/toolbar.js?v=' + Date.now() + '&_cb=' + Date.now() + '&rand=' + Math.random();
+        document.body.appendChild(toolbarScript);
+      }
+    </script>
+  </body>
+</html>
