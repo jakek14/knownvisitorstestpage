@@ -22,14 +22,15 @@ jobs:
       
       - name: Clean up previous deployment
         run: |
-          # Remove any previously deployed files that might cause conflicts
-          rm -f index.html
+          # Remove only built files that might cause conflicts
+          # Don't remove source files like index.html
           rm -rf assets/
-          rm -f *.js
-          rm -f *.css
+          rm -f main-*.js
+          rm -f main-*.css
           rm -f *.png
           rm -f *.svg
           rm -f _redirects
+          rm -f Klaviyo.png Google.png Big.png Woo.png Wix.png Tiktok.png Squarespace.png Snapchat.png Shopify.png Pinterest.png Meta.png vite.svg
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
