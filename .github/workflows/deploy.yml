@@ -57,7 +57,7 @@ jobs:
           echo "=== Package.json ==="
           cat package.json
           echo "=== Vite Config ==="
-          cat vite.config.ts
+          cat vite.config.js
       
       - name: Build
         run: cd clairvoyant-launch-pad && pnpm run build
