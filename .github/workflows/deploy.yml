@@ -43,26 +43,31 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       
+      - name: Change to clairvoyant-launch-pad directory
+        run: cd clairvoyant-launch-pad
+      
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: cd clairvoyant-launch-pad && pnpm install --frozen-lockfile
       
       - name: List project files
         run: |
           echo "=== Project Structure ==="
+          cd clairvoyant-launch-pad
           ls -la
           echo "=== Package.json ==="
           cat package.json
           echo "=== Vite Config ==="
-          cat vite.config.js
+          cat vite.config.ts
       
       - name: Build
-        run: pnpm run build
+        run: cd clairvoyant-launch-pad && pnpm run build
         env:
           CI: false
       
       - name: List dist contents
         run: |
           echo "=== Dist Contents ==="
+          cd clairvoyant-launch-pad
           ls -la dist/
           echo "=== Index.html Content ==="
           cat dist/index.html
@@ -75,7 +80,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './clairvoyant-launch-pad/dist'
       
       - name: Deploy to GitHub Pages
         id: deployment

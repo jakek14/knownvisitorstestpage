@@ -14,12 +14,12 @@ function App() {
 
   return (
     <ThemeProvider>
-      <TooltipProvider>
+    <TooltipProvider>
         <div className="relative bg-background transition-colors duration-200 min-h-screen">
-          <HeroSection />
+        <HeroSection />
           <Footer />
-        </div>
-      </TooltipProvider>
+      </div>
+    </TooltipProvider>
     </ThemeProvider>
   );
 }

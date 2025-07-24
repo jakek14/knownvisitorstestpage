@@ -88,17 +88,17 @@ export function HeroSection() {
     };
 
     return (
-            <div className="relative bg-white" data-hero-section>
-      {/* Hero Section with Wavy Background */}
-      <WavyBackground
-        backgroundFill="white"
+        <div className="relative bg-white" data-hero-section>
+            {/* Hero Section with Wavy Background */}
+            <WavyBackground 
+                backgroundFill="white"
                 waveOpacity={0.3}
                 blur={5}
                 speed="slow"
                 containerClassName="min-h-screen"
             >
                 <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-12 lg:pt-16">
-                                                            <div className="relative z-10 mx-auto max-w-4xl text-center">
+                    <div className="relative z-10 mx-auto max-w-4xl text-center">
                         {/* Logo */}
                         <div className="flex justify-center mb-2">
                             <img 
@@ -845,19 +845,19 @@ export function HeroSection() {
                 {/* Join Waitlist Button and Theme Toggle */}
                 <div className="text-center mt-16">
                     <div className="flex items-center justify-center gap-4">
-                        <Button 
-                            variant="outline"
-                            onClick={() => {
-                                const heroSection = document.querySelector('[data-hero-section]');
-                                if (heroSection) {
-                                    heroSection.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
-                            className="bg-green-600 hover:bg-green-700 text-white hover:text-white rounded-2xl px-12 py-6 font-semibold text-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:shadow-3xl border-green-600 relative overflow-hidden group shadow-[0_8px_0_rgb(22,163,74)] hover:shadow-[0_4px_0_rgb(22,163,74)] hover:translate-y-1"
-                        >
-                            <span className="relative z-10">Join the Waitlist</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </Button>
+                    <Button 
+                        variant="outline"
+                        onClick={() => {
+                            const heroSection = document.querySelector('[data-hero-section]');
+                            if (heroSection) {
+                                heroSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }}
+                        className="bg-green-600 hover:bg-green-700 text-white hover:text-white rounded-2xl px-12 py-6 font-semibold text-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-2 hover:shadow-3xl border-green-600 relative overflow-hidden group shadow-[0_8px_0_rgb(22,163,74)] hover:shadow-[0_4px_0_rgb(22,163,74)] hover:translate-y-1"
+                    >
+                        <span className="relative z-10">Join the Waitlist</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </Button>
                         <ThemeToggle />
                     </div>
                 </div>

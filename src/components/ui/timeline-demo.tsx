@@ -138,7 +138,7 @@ const Timeline: React.FC<TimelineProps> = ({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="text-lg font-semibold">{step.id}</span>
+                    <span className="text-lg font-semibold">{step.id}</span>
                   {/* Pulse effect for current step only */}
                   {step.id === pulsingStep && (
                     <motion.div
