@@ -62,17 +62,47 @@ jobs:
           echo "=== Assets Directory ==="
           ls -la dist/assets/
       
-      - name: Copy to docs folder
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+      
+      - name: Create _headers file for MIME types
         run: |
-          rm -rf docs
-          cp -r dist docs
-          echo "=== Docs Contents ==="
-          ls -la docs/
+          cat > dist/_headers << 'EOF'
+          /*
+            X-Frame-Options: DENY
+            X-Content-Type-Options: nosniff
+            Referrer-Policy: strict-origin-when-cross-origin
+          
+          /*.js
+            Content-Type: application/javascript
+          
+          /*.css
+            Content-Type: text/css
+          
+          /*.html
+            Content-Type: text/html
+          
+          /*.json
+            Content-Type: application/json
+          
+          /*.png
+            Content-Type: image/png
+          
+          /*.jpg
+            Content-Type: image/jpeg
+          
+          /*.svg
+            Content-Type: image/svg+xml
+          EOF
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
       
       - name: Deploy to GitHub Pages
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add docs/
-          git commit -m "Deploy to GitHub Pages" || echo "No changes to commit"
-          git push 
+        id: deployment
+        uses: actions/deploy-pages@v4 
