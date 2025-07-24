@@ -8,13 +8,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     
     steps:
       - name: Checkout
@@ -69,14 +62,17 @@ jobs:
           echo "=== Assets Directory ==="
           ls -la dist/assets/
       
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
+      - name: Copy to docs folder
+        run: |
+          rm -rf docs
+          cp -r dist docs
+          echo "=== Docs Contents ==="
+          ls -la docs/
       
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4 
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/
+          git commit -m "Deploy to GitHub Pages" || echo "No changes to commit"
+          git push 
