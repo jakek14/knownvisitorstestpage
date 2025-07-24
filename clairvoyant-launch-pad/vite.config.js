@@ -6,24 +6,15 @@ import path from "path"
 // Updated for GitHub Pages deployment
 export default defineConfig({
   base: '/knownvisitorstestpage/',
-  plugins: [
-    react()
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "/src/": path.resolve(__dirname, "./src/"),
     },
-    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
   },
   build: {
     outDir: "dist",
     assetsDir: "assets",
     emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "index.html"),
-      },
-    },
   },
 }) 
