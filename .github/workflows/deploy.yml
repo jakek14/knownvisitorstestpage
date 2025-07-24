@@ -47,7 +47,7 @@ jobs:
         run: cd clairvoyant-launch-pad
       
       - name: Install dependencies
-        run: cd clairvoyant-launch-pad && pnpm install
+        run: cd clairvoyant-launch-pad && pnpm install --no-frozen-lockfile
       
       - name: List project files
         run: |
