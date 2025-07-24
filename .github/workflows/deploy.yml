@@ -69,22 +69,13 @@ jobs:
           echo "=== Assets Directory ==="
           ls -la dist/assets/
       
-      - name: Copy to docs folder
-        run: |
-          rm -rf docs
-          cp -r dist docs
-          echo "=== Docs Contents ==="
-          ls -la docs/
-          echo "=== Docs Index.html Content ==="
-          cat docs/index.html
-      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'
+          path: './dist'
       
       - name: Deploy to GitHub Pages
         id: deployment

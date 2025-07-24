@@ -98,12 +98,12 @@ export function HeroSection() {
                 containerClassName="min-h-screen"
             >
                 <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-12 lg:pt-16">
-                    <div className="relative z-10 mx-auto max-w-4xl text-center">
+                                                            <div className="relative z-10 mx-auto max-w-4xl text-center">
                         {/* Logo */}
                         <div className="flex justify-center mb-2">
                             <img 
-                                src="/Untitled design (3).png" 
-                                alt="KnownVisitors Logo" 
+                                src="./logo.png?v=2" 
+                                alt="Logo" 
                                 className="h-16 sm:h-20 md:h-24 object-contain"
                             />
                         </div>
